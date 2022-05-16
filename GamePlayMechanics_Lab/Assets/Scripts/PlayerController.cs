@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    IEnumerator PowerUpCountDownRoutine()
+    public IEnumerator PowerUpCountDownRoutine()
     {
         yield return new WaitForSeconds(powerUpDuration);
         hasPowerUp = false;

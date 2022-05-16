@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 
     public float speed;
 
+    private float fellOutOfWorld = -10.0f;
+    
     //Declare Enemy rigidbody
     private Rigidbody enemyRb;
 
@@ -18,17 +20,27 @@ public class Enemy : MonoBehaviour
     {
 
         enemyRb = GetComponent<Rigidbody>();
+
         // Initalize Reference to player Gameobject
+        //Using find to get player script
         playerCont = GameObject.Find("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
+
         // Move towards vector math *normalized*
         Vector3 moveDirection = (playerCont.transform.position - enemyRb.transform.position).normalized;
+
         // Add force in the vector look direction 
         enemyRb.AddForce(moveDirection * speed);
+
+
+        if (transform.position.y < fellOutOfWorld)
+        {
+            Destroy(gameObject);
+        }
 
     }
 }
