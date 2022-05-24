@@ -29,6 +29,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // how many enemies in scene ?
         // Be carful: FindObjectsOfType & FindObjectOfType
         // Objects vs Objects
         nEnemiesInScene = FindObjectsOfType<Enemy>().Length;
@@ -36,36 +37,40 @@ public class SpawnManager : MonoBehaviour
         // If Enemy cout is == 0 Spawn 1 new enemy 
         if (nEnemiesInScene == 0)
         {
-
+            //Increment the Wave/level count
             enemyWaveCount++;
+            // spawn enemies equal wave count 
             SpawnEnemyWave(enemyWaveCount);
+            //Spawn PowerUp
             Instantiate(powerUpPreFab, GenerateSpawmnPosition(), powerUpPreFab.transform.rotation);
           
         }
     }
 
-    //IEnumerator PowerupCountdownRoutine()
+    
 
-    //{
-    //    yield return new WaitForSeconds(4);
-    //    enemyWaveCount++;
-
-    //}
-
-
+    
     void SpawnEnemyWave(int enemiesToSpawn)
     {
+        //Takes int enemiesToSpawn as input
+        //For i in enemiesToSPawn instantiate a new enemy
+        //Generate a spawn position
         for (int i = 0; i < enemiesToSpawn; i++)
         {
+           
             Instantiate(enemyPrefabs, GenerateSpawmnPosition(), enemyPrefabs.transform.rotation);
         }
     }
 
     private Vector3 GenerateSpawmnPosition()
     {
+        //Generate random spawn position on the X Axis
+        //Generate Random spawn position on the Z Axis
+        //Assign new Vector3 RandomPos
+        //Return New RandomPosition 
         float spawnPosX = Random.Range(-spawnRange, spawnRange);
         float spawnPosZ = Random.Range(-spawnRange, spawnRange);
-
+        
         Vector3 randomPos = new Vector3(spawnPosX, 0, spawnPosZ);
 
         return randomPos;
